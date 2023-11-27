@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр и редактирование профиля</title>
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="first">
+        {% include 'exit.html' %}
+        {% include 'mainpage.html' %}
+    </div>
+
+    <main class="maindata">
+        <div class="userdata">
+            <h3><b>Данные пользователя {{ user }}</b></h3>
+                <form  action="/main/profile/data/" method="post">
+                    {% csrf_token %}
+                    <div class="dataform">
+                        <div class="form-row1">
+                            <label for="{{ form.username.id_for_label }}">Пользователь: </label>
+                            {{ form.username }}
+                        </div>
+                        <div class="form-row1">
+                            <label for="{{ form.last_name.id_for_label }}">Фамилия пользователя: </label>
+                            {{ form.last_name }}
+                        </div>
+                        <div class="form-row1">
+                            <label for="{{ form.first_name.id_for_label }}">Имя пользователя: </label>
+                            {{ form.first_name }}
+                        </div>
+                        <div class="form-row1">
+                            <label for="{{ form.email.id_for_label }}">Адрес электронной почты: </label>
+                            {{ form.email }}
+                        </div>
+                        <div class="form-row1">
+                            <label for="{{ form.country.id_for_label }}">Страна: </label>
+                            {{ form.country }}
+                        </div>
+                        <div class="form-row1">
+                            <label for="{{ form.city.id_for_label }}">Город: </label>
+                            {{ form.city }}
+                        </div>
+                    </div>
+
+                    <input class="enter" type="submit" value="Сохранить">
+
+                </form>
+                <form>
+                    <button formaction="/main/profile/change_password">
+                        Изменить пароль
+                    </button>
+                    </form>
+                <form>
+                    <button formaction="/main/profile/edit_password/">
+                        Редактировать пароль
+                    </button>
+                </form>
+            </div>
+        </main>
+</body>
+</html>

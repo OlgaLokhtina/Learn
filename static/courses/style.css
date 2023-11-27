@@ -1,0 +1,102 @@
+
+
+body {
+    background-image: url('/static/users/ground.jpg');
+    background-size: cover;
+    overflow-x: hidden;
+
+}
+
+.title-1 {
+    display: line-block;
+    float: left;
+    width: 1150px;
+    margin: 20px;
+    margin-bottom: 0px;
+
+}
+
+h2 {
+    text-align: center
+}
+
+.doc {
+    display: line-block;
+    float: left;
+    margin-left: 100px;
+    margin-right: auto;
+    padding: 10px;
+    width: 80%;
+    background: White;
+    border-left: 2px solid Grey;
+    border-right: 2px solid Grey;
+}
+
+.paragraph {
+    margin: 10px;
+}
+
+#im {
+    width: 200px;
+
+}
+
+.block {
+    background: LightGrey;
+    height: 40px;
+    width: 100%;
+    border: 7px solid DarkGrey;
+    border-left: 0;
+    border-right: 0;
+    border-top: 0;
+    padding: 10px 20px;
+    line-height: 40px;
+    font-family: 'Bevan', serif;
+    font-size: 30px;
+    color: SlateGray;
+
+}
+
+.second {
+    display: line-block;
+    float: right;
+}
+
+
+th, td {
+    border: 1px solid Black;
+    
+    margin: 10px;
+    padding: 10px;
+}
+
+.stat {
+    display: line-block;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+
+}
+
+.filter {
+    display: line-block;
+    float: left;
+    margin: 10px;
+
+
+}
+
+.form-filter {
+    border: 1px solid Black;
+    padding: 10px;
+}
+
+#user-name {
+    margin: 10px;
+    width: 100px;
+}
+
+#course-name {
+    margin: 10px;
+    width: 250px;
+}

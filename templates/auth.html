@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добро пожаловать!</title>
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.1/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+</head>
+<body>
+    {% include 'header.html' %}
+    <aside>
+        <h2><b>Добро пожаловать, {{ user }}!</b></h2>
+        <ul id="menu">
+            <a class="menu" href="/main/profile/"><li>Профиль</li></a>
+            <a class="menu" href="/main/members/"><li>Пользователи</li></a>
+            <a class="menu" href="/main/statistic/"><li>Статистика просмотров</li></a>
+        </ul>
+    </aside>
+    <div class="title">
+        <h1>Наши онлайн курсы</h1>
+        <form class="form-search" role="search">
+            <input type="search" id="search" name="search" value="{{  symbols  }}" placeholder="поиск курса">
+            <button action="/main/auth/">Найти</button>
+        </form>
+    </div>
+    {% include 'exit.html' %}
+    <main class="course-bar">
+        {% for bar in course_bar %}
+            <div class="bar">
+                <a class="menu" href="{% url 'course' bar.id %}">
+                    <div class="bar-context" id="bar-c">
+                        <p id="image"><img src="{{ bar.preview.url }}"></p>
+                        <b id="title">{{ bar.title }}</b>
+                        <i id="data">{{ bar.created }}</i>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </main>
+    <script src="{% static 'courses/search.js' %}"></script>
+</body>
+</html>

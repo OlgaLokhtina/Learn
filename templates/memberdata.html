@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>Справка</title>
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="first">
+        {% include 'exit.html' %}
+        {% include 'mainpage.html' %}
+    </div>
+    <main class="maindata">
+        <div class="memberdata">
+            <h3><b>ИНФОРМАЦИЯ О ПОЛЬЗОВАТЕЛЕ</b></h3>
+            <table>
+                <thread>
+                    <tr>
+                        <th>Пользователь</th>
+                        <th>Электронная почта</th>
+                        <th>Страна</th>
+                        <th>Город</th>
+                        <th>Номер телефона</th>
+                    </tr>
+                </thread>
+                <tbody align="center">
+                    <tr>
+                        <td>{{ member.first_name }} {{ member.last_name }}</td>
+                        <td>{{ member.email }}</td>
+                        <td>{{ member.country }}</td>
+                        <td>{{ member.city }}</td>
+                        <td>{{ member.number_telephone }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <form>
+                <button formaction="/main/members/">
+                    OK
+                </button>
+            </form>
+        </div>
+
+    <img scr="{% static 'users/sym.jpg' %}">
+    </main>
+</body>
+</html>

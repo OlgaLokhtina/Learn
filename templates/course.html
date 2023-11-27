@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Курс - {{  c.title  }}</title>
+    <link rel="stylesheet" href="{% static 'courses/style.css' %}">
+
+</head>
+<body>
+    <header>{% include 'header.html' %}</header>
+    <main>
+
+        <div class="doc">
+            <h2>{{  c.title  }}</h2>
+            {%  for block in b  %}
+                <div class="paragraph">
+                {%  if block.type.name == "html"  %}
+                    <p>{{  block.text  }}</p>
+                {%  endif  %}
+                {%  if block.type.name == "image"  %}
+                    <p><img id="im" src="{{ block.image.url }}"></p>
+                    <p>{{  block.text  }}</p>
+                {%  endif  %}
+                {%  if block.type.name == "file"  %}
+                    <p>{{  block.text  }}</p>
+                    <p><a href="{{ block.file.url }}" download>Скачать</a></p>
+
+                {%  endif  %}
+                </div>
+            {%  endfor  %}
+        </div>
+    </main>
+    {% include 'exit.html' %}
+</body>
+</html>

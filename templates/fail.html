@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ошибка</title>
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="info">
+        <h3><b>Пароль НЕ изменен!</b></h3>
+        {% for er in error %}
+            <p>{{ er }}</p><br>
+        {% endfor %}
+        <p>{{ help_text }}</p>
+        <form action="/main/profile/">
+            <button>
+                OK
+            </button>
+        </form>
+    </div>
+</body>
+</html>

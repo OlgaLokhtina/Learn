@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+    <script src="{% static 'users/my_js.js' %}"></script>
+</head>
+<body>
+    {% include 'header.html' %}
+    <div class="registration">
+        <h3 style="text-align: center;"><b>РЕГИСТРАЦИЯ</b></h3>
+        <form action="/main/login/" method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <label for="{{ form.username.id_for_label }}">Имя пользователя</label>
+                {{ form.username }}
+            </div>
+            <div class="form-row">
+                <label id="m" for="{{ form.password.id_for_label }}">Пароль</label>
+                {{ form.password }}
+            </div>
+
+            <div class="form-row">
+            <button class="enter" type="submit">Войти</button>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>

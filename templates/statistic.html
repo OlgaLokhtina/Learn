@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Статистика просмотров</title>
+    <link rel="stylesheet" href="{% static 'courses/style.css' %}">
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    <script src="{% static 'courses/course_script.js' %}"></script>
+    <main>
+        <div class="title-1">
+            <p><h2>Статистика просмотра курсов</h2></p>
+        </div>
+        {% include 'mainpage.html' %}
+        {% include 'exit.html' %}
+        <div class="stat">
+            <table>
+                <thread>
+                    <tr>
+                        <th>Пользователь</th>
+                        <th>Наименование курса</th>
+                        <th>Время посещения</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {%  for entry in page_obj  %}
+                    <tr>
+                        <td>{{  entry.user  }}</td>
+                        <td>{{  entry.course  }}</td>
+                        <td>{{  entry.date  }}</td>
+                    </tr>
+                    {%  endfor  %}
+                </tbody>
+            </table>
+            <form>
+                <button formaction="/main/statistic/load/">
+                    Скачать
+                </button>
+            </form>
+        </div>
+        <div class="filter">
+            <div class="title-2">
+                <p><h3>ФИЛЬТР</h3></p>
+            </div>
+            <form class="form-filter">
+                <div>
+                <label for="user-name">Пользователь</label><br>
+                <select name="user_name" id="user-name">
+                    <option value="">выберите пользователя</option>
+                    {%  for member in user_list  %}
+                        {%  if member.username == u_name  %}
+                            <option value="{{  member.username  }}" selected="selected">{{ member.username  }}</option>
+                        {%  else  %}
+                            <option value="{{  member.username  }}">{{ member.username  }}</option>
+                        {%  endif%}
+                    {%  endfor  %}
+                </select>
+                </div>
+                <div>
+                <label for="course-name">Наименование курса</label><br>
+                <select name="course_name" id="course-name">
+                    <option value="">выберите наименование курса</option>
+                    {%  for element in course_list  %}
+                        {%  if element.title == course_name  %}
+                            <option value="{{  element.title  }}" selected>{{ element.title  }}</option>
+                        {% else %}
+                            <option value="{{  element.title  }}">{{ element.title  }}</option>
+                        {% endif %}
+                    {%  endfor  %}
+                </select>
+                </div>
+                <button type="submit" formaction="/main/statistic/">
+                    Показать
+                </button>
+                <button type="button" onclick="buttonReset(this)">
+                    Сбросить
+                </button>
+            </form>
+        </div>
+        <div class="pagination">
+            <span>
+                <a class="page" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page=1">&laquo;</a>
+                {%  if page_obj.has_previous  %}
+                    <a class="page" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page={{  page_obj.previous_page_number  }}">&lsaquo;</a>
+                    {%  if page_obj.previous_page_number > 1  %}
+                        ...
+                    {%  endif  %}
+                    <a class="num" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page={{  page_obj.number|add:'-1'  }}">{{  page_obj.number|add:'-1'  }}</a>
+                {%  endif  %}
+            <span class="num-main">{{  page_obj.number  }}</span>
+                {%  if page_obj.has_next  %}
+                    <a class="num" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page={{  page_obj.number|add:'1'  }}">{{  page_obj.number|add:'1'  }}</a>
+                    {%  if page_obj.next_page_number < page_obj.paginator.num_pages  %}
+                        ...
+                    {%  endif  %}
+                    <a class="page" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page={{  page_obj.next_page_number  }}">&rsaquo;</a>
+                {%  endif  %}
+                <a class="page" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page={{  page_obj.paginator.num_pages  }}">&raquo</a>
+            </span>
+        </div>
+    </main>
+
+</body>
+</html>
