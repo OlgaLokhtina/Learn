@@ -6,12 +6,10 @@ from .views import *
 
 
 urlpatterns = [
-    path('course/<int:id>/', course, name='course'),
-    path('statistic/', listing, name='listing'),
-    path('statistic/load/', statistic, name='statistic'),
-
+    path("course/<int:id>/", course, name="course"),
+    path("statistic/", listing, name="listing"),
+    path("statistic/load/", statistic, name="statistic"),
 ]
-
 
 
 if settings.DEBUG:

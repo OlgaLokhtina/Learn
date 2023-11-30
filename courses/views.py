@@ -8,6 +8,7 @@ from users.models import User
 
 # Create your views here.
 
+
 def course(request, id):
     user_in = request.user
     c = Course.objects.get(id=id)
@@ -16,17 +17,18 @@ def course(request, id):
     course_view.save()
     return render(request, "course.html", {"b": b, "c": c})
 
+
 def statistic(request):
     views = CourseView.objects.all()
 
-    workbook = xlsxwriter.Workbook('static/courses/stat.xlsx')
-    worksheet = workbook.add_worksheet('Статистика просмотров')
-    bold = workbook.add_format({'bold': True})
-    cell_format = workbook.add_format({'align': 'center_across'})
+    workbook = xlsxwriter.Workbook("static/courses/stat.xlsx")
+    worksheet = workbook.add_worksheet("Статистика просмотров")
+    bold = workbook.add_format({"bold": True})
+    cell_format = workbook.add_format({"align": "center_across"})
 
-    worksheet.write('A1', 'Пользователь', cell_format)
-    worksheet.write('B1', 'Наименование курса', bold)
-    worksheet.write('C1', 'Время посещения', bold)
+    worksheet.write("A1", "Пользователь", cell_format)
+    worksheet.write("B1", "Наименование курса", bold)
+    worksheet.write("C1", "Время посещения", bold)
 
     row = 1
     col = 0
@@ -40,11 +42,12 @@ def statistic(request):
     workbook.close()
     return render(request, "load.html")
 
+
 def listing(request):
     course_name = None
     u_name = None
-    if request.GET.get('course_name'):
-        course_name = request.GET.get('course_name')
+    if request.GET.get("course_name"):
+        course_name = request.GET.get("course_name")
         view_list = CourseView.objects.filter(course__title=course_name)
     else:
         view_list = CourseView.objects.all()
@@ -54,12 +57,20 @@ def listing(request):
     else:
         view_list = CourseView.objects.all()
 
-
     paginator = Paginator(view_list, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     user_list = User.objects.all()
     course_list = Course.objects.all()
-    return render(request, "statistic.html", {"page_obj": page_obj, "views": view_list, "user_list": user_list, "course_list": course_list, "course_name": course_name, "u_name": u_name})
-
-
+    return render(
+        request,
+        "statistic.html",
+        {
+            "page_obj": page_obj,
+            "views": view_list,
+            "user_list": user_list,
+            "course_list": course_list,
+            "course_name": course_name,
+            "u_name": u_name,
+        },
+    )

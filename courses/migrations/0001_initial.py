@@ -6,39 +6,77 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Course',
+            name="Course",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('preview', models.TextField()),
-                ('order', models.IntegerField()),
-                ('created', models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("preview", models.TextField()),
+                ("order", models.IntegerField()),
+                ("created", models.DateTimeField(default=django.utils.timezone.now)),
             ],
         ),
         migrations.CreateModel(
-            name='TypeBlock',
+            name="TypeBlock",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=50)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=50)),
             ],
         ),
         migrations.CreateModel(
-            name='Block',
+            name="Block",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField()),
-                ('order', models.IntegerField()),
-                ('file', models.FileField(upload_to='courses')),
-                ('course', models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.SET_DEFAULT, to='courses.course')),
-                ('type', models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.SET_DEFAULT, to='courses.typeblock')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("text", models.TextField()),
+                ("order", models.IntegerField()),
+                ("file", models.FileField(upload_to="courses")),
+                (
+                    "course",
+                    models.ForeignKey(
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_DEFAULT,
+                        to="courses.course",
+                    ),
+                ),
+                (
+                    "type",
+                    models.ForeignKey(
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_DEFAULT,
+                        to="courses.typeblock",
+                    ),
+                ),
             ],
         ),
     ]

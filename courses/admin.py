@@ -26,6 +26,3 @@ class CourseViewAdmin(admin.ModelAdmin):
     list_display = ["user", "course", "date"]
     list_filter = ["user", "course"]
     readonly_fields = ["user", "course", "date"]
-
-
-

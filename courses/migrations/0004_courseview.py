@@ -7,20 +7,43 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('courses', '0003_block_image_alter_block_file_alter_block_text_and_more'),
+        ("courses", "0003_block_image_alter_block_file_alter_block_text_and_more"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='CourseView',
+            name="CourseView",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateTimeField(default=django.utils.timezone.now)),
-                ('course', models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.SET_DEFAULT, to='courses.course')),
-                ('user', models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.SET_DEFAULT, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.DateTimeField(default=django.utils.timezone.now)),
+                (
+                    "course",
+                    models.ForeignKey(
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_DEFAULT,
+                        to="courses.course",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        default=None,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_DEFAULT,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
     ]

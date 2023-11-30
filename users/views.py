@@ -14,7 +14,13 @@ from .forms import UserLoginForm
 from .forms import ProfileForm
 from .models import User
 from courses.models import Course
-from .password import AlphaValidator, MinimumLengthValidator, RegisterValidator, DigitValidator, SymbolValidator
+from .password import (
+    AlphaValidator,
+    MinimumLengthValidator,
+    RegisterValidator,
+    DigitValidator,
+    SymbolValidator,
+)
 
 
 class Members(View):
@@ -29,11 +35,9 @@ class UserListView(ListView):
     template_name = "members.html"
 
 
-
-
 def member_select(request):
-    if request.GET.get('search-member'):
-        s = request.GET.get('search-member')
+    if request.GET.get("search-member"):
+        s = request.GET.get("search-member")
         mem = User.objects.filter(
             Q(first_name__icontains=s) | Q(last_name__icontains=s)
         ).order_by("last_name")
@@ -43,13 +47,10 @@ def member_select(request):
         return render(request, "members.html", {"mem": mem})
 
 
-
-
 class MemberData(DetailView):
     model = User
     template_name = "memberdata.html"
     context_object_name = "member"
-
 
 
 def get_profile(request):
@@ -65,47 +66,70 @@ def get_profile(request):
 
 
 def login(request):
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+    if request.method == "POST":
+
+        username = (request.POST)["username"]
+        password = request.POST["password"]
         user = auth.authenticate(username=username, password=password)
         if user:
             auth.login(request, user)
-            return HttpResponseRedirect(reverse('main'))
+            return HttpResponseRedirect(reverse("main"))
         form = UserLoginForm()
         context = {"form": form}
-        return render(request, 'login.html', context)
-    if request.method == 'GET':
+        return render(request, "login.html", context)
+    if request.method == "GET":
         form = UserLoginForm()
         context = {"form": form}
-        return render(request, 'login.html', context)
+        return render(request, "login.html", context)
 
 
 def edit_password(request):
-    validators = [SymbolValidator(), DigitValidator(), MinimumLengthValidator(), AlphaValidator(), RegisterValidator()]
+    validators = [
+        SymbolValidator(),
+        DigitValidator(),
+        MinimumLengthValidator(),
+        AlphaValidator(),
+        RegisterValidator(),
+    ]
     help_text = []
     for v in validators:
         help_text.append(v.get_help_text())
-    if request.method == 'GET':
-        return render(request, 'edit_password.html', {"help_text": help_text})
-    if request.method == 'POST':
-        password = request.POST['password']
-        new_password = request.POST['new_password']
-        repeat_new_password = request.POST['repeat_new_password']
+    if request.method == "GET":
+        return render(request, "edit_password.html", {"help_text": help_text})
+    if request.method == "POST":
+        password = request.POST["password"]
+        new_password = request.POST["new_password"]
+        repeat_new_password = request.POST["repeat_new_password"]
         if not request.user.check_password(password):
             message = "Не верно введен существующий пароль!"
-            return render(request, 'edit_password.html', {"help_text": help_text, "message": message})
+            return render(
+                request,
+                "edit_password.html",
+                {"help_text": help_text, "message": message},
+            )
         if new_password != repeat_new_password:
             message = "Введенные пароли не совпадают!"
-            return render(request, 'edit_password.html', {"help_text": help_text, "message": message})
+            return render(
+                request,
+                "edit_password.html",
+                {"help_text": help_text, "message": message},
+            )
         if new_password == request.user.password:
             message = "Новый пароль не должен быть похож на старый!"
-            return render(request, 'edit_password.html', {"help_text": help_text, "message": message})
+            return render(
+                request,
+                "edit_password.html",
+                {"help_text": help_text, "message": message},
+            )
         try:
-            validate_password(password=new_password, user=request.user, password_validators=validators)
+            validate_password(
+                password=new_password, user=request.user, password_validators=validators
+            )
         except ValidationError as error:
-            return render(request, 'edit_password.html', {"help_text": help_text, "error": error})
-            #return render(request, "fail.html", {"error": error, "help_text": help_text})
+            return render(
+                request, "edit_password.html", {"help_text": help_text, "error": error}
+            )
+            # return render(request, "fail.html", {"error": error, "help_text": help_text})
         request.user.set_password(new_password)
         request.user.save()
         auth.login(request, request.user)
@@ -117,29 +141,26 @@ def main(request):
         if request.GET.get("search"):
             symbols = request.GET.get("search")
             course_bar = Course.objects.filter(title__contains=symbols)
-            return render(request, 'auth.html', {"user": request.user, "course_bar": course_bar, "symbols": symbols})
+            return render(
+                request,
+                "auth.html",
+                {"user": request.user, "course_bar": course_bar, "symbols": symbols},
+            )
         else:
             course_bar = Course.objects.all()
-            return render(request, 'auth.html', {"user": request.user, "course_bar": course_bar})
+            return render(
+                request, "auth.html", {"user": request.user, "course_bar": course_bar}
+            )
     form = UserLoginForm()
     context = {"form": form}
-    return render(request, 'login.html', context)
+    return render(request, "login.html", context)
+
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect(reverse('main'))
+    return HttpResponseRedirect(reverse("main"))
 
 
 class PasswordChange(PasswordChangeView):
     success_url = reverse_lazy("profile")
     template_name = "password_change_form.html"
-
-
-
-
-
-
-
-
-
-

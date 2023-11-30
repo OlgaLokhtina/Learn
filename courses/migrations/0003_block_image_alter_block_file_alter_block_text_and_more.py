@@ -4,30 +4,29 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('courses', '0002_course_description_alter_course_preview'),
+        ("courses", "0002_course_description_alter_course_preview"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='block',
-            name='image',
-            field=models.ImageField(blank=True, null=True, upload_to='courses'),
+            model_name="block",
+            name="image",
+            field=models.ImageField(blank=True, null=True, upload_to="courses"),
         ),
         migrations.AlterField(
-            model_name='block',
-            name='file',
-            field=models.FileField(blank=True, null=True, upload_to='courses'),
+            model_name="block",
+            name="file",
+            field=models.FileField(blank=True, null=True, upload_to="courses"),
         ),
         migrations.AlterField(
-            model_name='block',
-            name='text',
+            model_name="block",
+            name="text",
             field=models.TextField(blank=True),
         ),
         migrations.AlterField(
-            model_name='course',
-            name='preview',
-            field=models.ImageField(upload_to='courses'),
+            model_name="course",
+            name="preview",
+            field=models.ImageField(upload_to="courses"),
         ),
     ]
