@@ -44,30 +44,24 @@ def statistic(request):
 
 
 def listing(request):
-    course_name = None
-    u_name = None
-    if request.GET.get("course_name"):
-        course_name = request.GET.get("course_name")
-        view_list = CourseView.objects.filter(course__title=course_name)
-    else:
-        view_list = CourseView.objects.all()
-    if request.GET.get("user_name"):
-        u_name = request.GET.get("user_name")
+    view_list = CourseView.objects.all()
+    course_name = request.GET.get("course_name")
+    u_name = request.GET.get("user_name")
+    if course_name != "all":
+        view_list = view_list.filter(course__title=course_name)
+    if u_name != "all":
         view_list = view_list.filter(user__username=u_name)
-    else:
-        view_list = CourseView.objects.all()
-
     paginator = Paginator(view_list, 5)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
-    user_list = User.objects.all()
-    course_list = Course.objects.all()
+    user_list = User.objects.all().order_by("username")
+    course_list = Course.objects.all().order_by("title")
     return render(
         request,
         "statistic.html",
         {
             "page_obj": page_obj,
-            "views": view_list,
+            # "views": view_list,
             "user_list": user_list,
             "course_list": course_list,
             "course_name": course_name,

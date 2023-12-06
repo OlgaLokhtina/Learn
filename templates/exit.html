@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
 <link rel="stylesheet" href="{% static 'users/red.css' %}">
-<div class="second">
+
+    <div class="exit">
     <form action="/main/logout/">
-        <button>
+        <input type="image" src="{% static '/users/exit-arrow.png' %}" alt="Кнопка «input»">
+        <!--<button>
             Выход
-        </button>
+        </button>-->
     </form>
-</div>
+    </div>
+

@@ -10,12 +10,15 @@
 </head>
 <body>
     {% include 'header.html' %}
+    <div class="exit-arrow">
+        {% include 'exit.html' %}
+    </div>
     <aside>
         <h2><b>Добро пожаловать, {{ user }}!</b></h2>
         <ul id="menu">
             <a class="menu" href="/main/profile/"><li>Профиль</li></a>
             <a class="menu" href="/main/members/"><li>Пользователи</li></a>
-            <a class="menu" href="/main/statistic/"><li>Статистика просмотров</li></a>
+            <a class="menu" href="/main/statistic/?user_name={{ 'all' }}&course_name={{  'all' }}"><li>Статистика просмотров</li></a>
         </ul>
     </aside>
     <div class="title">
@@ -25,7 +28,6 @@
             <button action="/main/auth/">Найти</button>
         </form>
     </div>
-    {% include 'exit.html' %}
     <main class="course-bar">
         {% for bar in course_bar %}
             <div class="bar">

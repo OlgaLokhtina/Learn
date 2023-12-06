@@ -5,28 +5,26 @@
     <meta charset="UTF-8">
     <title>Пользователи</title>
     <link rel="stylesheet" href="{% static 'users/red.css' %}">
-    <!--<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script type="text/javascript" src="https://yastatic.net/jquery/3.3.1/jquery.min.js"></script>-->
-    <link href="{% static 'users/select2.min.css' %}" rel="stylesheet" />
-    <script src="{% static 'users/select2.min.js' %}"></script>
-
 </head>
 <body >
     {% include 'header.html' %}
-    <div class="first">
+    <div class="exit-arrow">
         {% include 'exit.html' %}
+    </div>
+    <div class="first">
         {% include 'mainpage.html' %}
     </div>
+
     <main class="maindata">
+        <div class="memberdata">
+            <h3><b>ПОЛЬЗОВАТЕЛИ</b></h3>
         <div class="single">
             <form class="selection" role="search" action="/main/members/">
-                <input type="search" name="search-member" placeholder="поиск пользователей" value="{{  s  }}">
+                <input class="input-search" type="search" name="search-member" placeholder="поиск пользователей" value="{{  s  }}">
                 <button>Найти</button>
             </form>
         </div>
         <div id="mlist" >
-            <h3>Все пользователи:</h3>
             {% for el in page_obj %}
                 <div class="user-data">
                     <a class="menu" href="{% url 'member_data' el.id %}" title="Профиль пользователя">
@@ -62,6 +60,7 @@
                 <a class="page" href="?page={{  page_obj.paginator.num_pages  }}">&raquo</a>
             </span>
         </div>
+            </div>
     </main>
 
     <script type="text/javascript" src="{% static 'users/sel.js' %}"></script>

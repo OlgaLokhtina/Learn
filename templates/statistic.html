@@ -9,13 +9,14 @@
 </head>
 <body>
     {% include 'header.html' %}
-    <script src="{% static 'courses/course_script.js' %}"></script>
-    <main>
-        <div class="title-1">
-            <p><h2>Статистика просмотра курсов</h2></p>
-        </div>
-        {% include 'mainpage.html' %}
+    <div class="exit-arrow">
         {% include 'exit.html' %}
+    </div>
+        {% include 'mainpage.html' %}
+    <div class="title-1">
+            <h2>Статистика просмотра курсов</h2>
+    </div>
+    <main class="info">
         <div class="stat">
             <table>
                 <thread>
@@ -49,7 +50,7 @@
                 <div>
                 <label for="user-name">Пользователь</label><br>
                 <select name="user_name" id="user-name">
-                    <option value="">выберите пользователя</option>
+                    <option value='all'>выберите пользователя</option>
                     {%  for member in user_list  %}
                         {%  if member.username == u_name  %}
                             <option value="{{  member.username  }}" selected="selected">{{ member.username  }}</option>
@@ -62,7 +63,7 @@
                 <div>
                 <label for="course-name">Наименование курса</label><br>
                 <select name="course_name" id="course-name">
-                    <option value="">выберите наименование курса</option>
+                    <option value='all'>выберите наименование курса</option>
                     {%  for element in course_list  %}
                         {%  if element.title == course_name  %}
                             <option value="{{  element.title  }}" selected>{{ element.title  }}</option>
@@ -80,7 +81,7 @@
                 </button>
             </form>
         </div>
-        <div class="pagination">
+        <div class="pagination-2">
             <span>
                 <a class="page" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page=1">&laquo;</a>
                 {%  if page_obj.has_previous  %}
@@ -102,6 +103,6 @@
             </span>
         </div>
     </main>
-
+<script src="{% static 'courses/course_script.js' %}"></script>
 </body>
 </html>

@@ -1,4 +1,7 @@
 /media/
 /db.sqlite3
 /courses/__pycache__/
+/courses/migrations/__pycache__/
 /users/__pycache__/
+/users/migrations/__pycache__/
+/PyLearn/__pycache__/
