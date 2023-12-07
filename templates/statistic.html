@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{% static 'users/red.css' %}">
 </head>
 <body>
+
     {% include 'header.html' %}
     <div class="exit-arrow">
         {% include 'exit.html' %}
@@ -36,10 +37,9 @@
                     {%  endfor  %}
                 </tbody>
             </table>
+
             <form>
-                <button formaction="/main/statistic/load/">
-                    Скачать
-                </button>
+                <a class="enter" href="/main/statistic/load/?user_name={{  u_name  }}&course_name={{  course_name  }}">Экспорт данных в отчет</a>
             </form>
         </div>
         <div class="filter">

@@ -19,9 +19,15 @@ def course(request, id):
 
 
 def statistic(request):
-    views = CourseView.objects.all()
+    view_list = CourseView.objects.all()
+    course_name = request.GET.get("course_name")
+    u_name = request.GET.get("user_name")
+    if course_name != "all":
+        view_list = view_list.filter(course__title=course_name)
+    if u_name != "all":
+        view_list = view_list.filter(user__username=u_name)
 
-    workbook = xlsxwriter.Workbook("static/courses/stat.xlsx")
+    workbook = xlsxwriter.Workbook("media/stat.xlsx")
     worksheet = workbook.add_worksheet("Статистика просмотров")
     bold = workbook.add_format({"bold": True})
     cell_format = workbook.add_format({"align": "center_across"})
@@ -33,7 +39,7 @@ def statistic(request):
     row = 1
     col = 0
 
-    for v in views:
+    for v in view_list:
         worksheet.write(row, col, v.user.first_name)
         worksheet.write(row, col + 1, v.course.title)
         worksheet.write(row, col + 2, str(v.date))
@@ -61,10 +67,33 @@ def listing(request):
         "statistic.html",
         {
             "page_obj": page_obj,
-            # "views": view_list,
+            "view_list": view_list,
             "user_list": user_list,
             "course_list": course_list,
             "course_name": course_name,
             "u_name": u_name,
         },
     )
+    # if request.method == "POST":
+    #     view_list = request.GET.get("list")
+    #
+    #     workbook = xlsxwriter.Workbook("media/stat.xlsx")
+    #     worksheet = workbook.add_worksheet("Статистика просмотров")
+    #     bold = workbook.add_format({"bold": True})
+    #     cell_format = workbook.add_format({"align": "center_across"})
+    #
+    #     worksheet.write("A1", "Пользователь", cell_format)
+    #     worksheet.write("B1", "Наименование курса", bold)
+    #     worksheet.write("C1", "Время посещения", bold)
+    #
+    #     row = 1
+    #     col = 0
+    #
+    #     for v in view_list:
+    #         worksheet.write(row, col, v.user.first_name)
+    #         worksheet.write(row, col + 1, v.course.title)
+    #         worksheet.write(row, col + 2, str(v.date))
+    #         row += 1
+    #
+    #     workbook.close()
+    #     return render(request, "load.html")
