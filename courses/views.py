@@ -24,23 +24,23 @@ def statistic(request):
     if u_name != "all":
         view_list = view_list.filter(user__username=u_name)
 
-    workbook = xlsxwriter.Workbook("media/stat.xlsx")
+    workbook = xlsxwriter.Workbook("media/stat.xlsx", {"remove_timezone": True})
     worksheet = workbook.add_worksheet("Статистика просмотров")
     bold = workbook.add_format({"bold": True})
     cell_format = workbook.add_format({"align": "center_across"})
 
-    worksheet.write("A1", "Пользователь", cell_format)
+    worksheet.write("A1", "Пользователь", bold, cell_format)
     worksheet.write("B1", "Наименование курса", bold)
     worksheet.write("C1", "Время посещения", bold)
 
-    row = 1
-    col = 0
+    cell_format01 = workbook.add_format({"num_format": "d mmmm yyyy"})
+    worksheet.set_column(2, 2, 20, cell_format01)
 
-    for v in view_list.values("user__first_name", "course__title", "date"):
-        worksheet.write(row, col, v["user__first_name"])
-        worksheet.write(row, col + 1, v["course__title"])
-        worksheet.write(row, col + 2, str(v["date"]))
-        row += 1
+    correct_list = view_list.values_list("user__first_name", "course__title", "date")
+
+    for row_num, v in enumerate(correct_list):
+        for col_num, s in enumerate(v):
+            worksheet.write(row_num + 1, col_num, s)
 
     workbook.close()
     return HttpResponseRedirect(redirect_to="/media/stat.xlsx")
