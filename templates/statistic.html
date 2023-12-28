@@ -10,13 +10,7 @@
 <body>
 
     {% include 'header.html' %}
-    <div class="exit-arrow">
-        {% include 'exit.html' %}
-    </div>
-        {% include 'mainpage.html' %}
-    <div class="title-1">
-            <h2>Статистика просмотра курсов</h2>
-    </div>
+    {% include 'header-2.html' %}
     <main class="info">
         <div class="stat">
             <table>
@@ -92,8 +86,9 @@
                     <a class="num" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page={{  page_obj.number|add:'-1'  }}">{{  page_obj.number|add:'-1'  }}</a>
                 {%  endif  %}
             <span class="num-main">{{  page_obj.number  }}</span>
+
                 {%  if page_obj.has_next  %}
-                    <a class="num" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page={{  page_obj.number|add:'1'  }}">{{  page_obj.number|add:'1'  }}</a>
+                    <a class="num" href="?user_name={{  u_name  }}&course_name={{  course_name  }}&page={{  page_obj.next_page_number  }}">{{  page_obj.number|add:'1'  }}</a>
                     {%  if page_obj.next_page_number < page_obj.paginator.num_pages  %}
                         ...
                     {%  endif  %}

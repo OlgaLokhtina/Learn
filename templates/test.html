@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'courses/style.css' %}">
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'header-2.html' %}
+    <main>
+    <div class="catalog">
+        <p><h1>Тесты</h1></p>
+        {% for test in tests %}
+        <div class="test">
+            <a class="menu-1" href="{% url 'test' test.id %}">
+                <div class="test-2">
+                    <div class="test-1">
+                    <h3>{{ test.title }}</h3>
+                    <p>{{ test.description}}</p>
+                    </div>
+                    <img src="{{ test.preview.url }}">
+                </div>
+
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    </main>
+</body>
+</html>

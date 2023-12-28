@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'courses/style.css' %}">
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'header-2.html' %}
+    <script src="{% static 'courses/test.js' %}"></script>
+    <div class="test-list">
+    <form name="test" id="test" action="" method="post">
+        {% csrf_token %}
+        <p>Вопрос {{ page_obj.number }} из {{ request.session.num_pages }}</p>
+        {% for element in page_obj %}
+            <p><b>{{ element.text }}</b></p>
+        {% endfor %}
+        {% for option in options %}
+            <p><input id="option" name="option" type="radio" value="{{ option.text }}">{{ option.text }}</p>
+        {% endfor %}
+        <p></p>
+        {% if page_obj.has_next %}
+            <input type="hidden" name="user_page" value="{{  page_obj.next_page_number  }}">
+        {% else %}
+            <input type="hidden" name="user_page" value="0">
+        {% endif %}
+            <button id="subButton" type="submit" >
+                Далее
+            </button>
+
+    </form>
+    </div>
+</body>
+</html>

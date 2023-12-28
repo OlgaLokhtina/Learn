@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'courses/style.css' %}">
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'header-2.html' %}
+    <div class="test-pass">
+        <form action="{% url 'test_attempt' test.id %}" method="post">
+            {% csrf_token %}
+            <h2>{{ test.title }}</h2>
+            <p>{{ test.description}}</p>
+            <input type="hidden" name="user_page" value="1">
+            <button>Начать тестирование</button>
+        </form>
+    </div>
+</body>
+</html>

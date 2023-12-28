@@ -1,4 +1,7 @@
-
+* {
+    margin:0;
+    padding:0;
+}
 
 body {
     background-image: url('/static/users/ground.jpg');
@@ -15,7 +18,7 @@ body {
     margin-bottom: 0px;
 }
 
-h2 {
+.doc h2 {
     text-align: center
 }
 
@@ -113,4 +116,90 @@ th, td {
     display: line-block;
     float: left;
     margin: 20px;
+}
+
+.catalog {
+    display: line-block;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+}
+
+.test {
+    width: 700px;
+    height: 145px;
+    margin: 10px;
+}
+
+.test-2 {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px Gainsboro solid;
+    height: 110px;
+    background: WhiteSmoke;
+}
+
+.test-1 {
+    display: line-block;
+    float: left;
+    width: 600px;
+}
+
+.test img {
+    display: line-block;
+    float: right;
+    width: 70px;
+    height: 70px;
+}
+
+.menu-1 {
+    text-decoration: none;
+    color: Black;
+}
+
+.test-2:hover {
+    color: White;
+    background: SlateGray;
+    border-radius: 10px;
+}
+
+.test-pass {
+    width: 400px;
+    height: 400px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.test-list {
+    display: line-block;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+}
+
+.test-list p {
+    margin: 10px;
+}
+
+.test-pass button {
+    margin-left: 0px;
+}
+
+.test-end {
+    display: line-block;
+    float: left;
+    margin: 10px;
+    padding: 10px;
+}
+
+.test-end p {
+    margin: 10px;
+}
+
+.green {
+    color: Green;
+}
+
+.red {
+    color: Red;
 }

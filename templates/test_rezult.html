@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'courses/style.css' %}">
+    <link rel="stylesheet" href="{% static 'users/red.css' %}">
+</head>
+<body>
+    {% include 'header.html' %}
+    {% include 'header-2.html' %}
+    <div class="test-list">
+        <p><h2>Результаты:</h2></p>
+        <p>{{ rezults.user }}</p>
+        <p>{{ rezults.date }}</p>
+        {% for opt in rezults.options.all %}
+            <p><b>{{ opt.question }}</b></p>
+            {% if opt.right %}
+                <p>Ваш ответ: <span class="green">{{ opt.text }}</span></p>
+                <p>Верно</p>
+            {% else %}
+                <p>Ваш ответ: <span class="red">{{ opt.text }}</span></p>
+                <p>Не верно</p>
+            {% endif%}
+        {% endfor %}
+        <a class="enter" href="/main/test/">К списку тестов</a>
+    </div>
+</body>
+</html>
