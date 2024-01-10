@@ -3,5 +3,7 @@
 /courses/migrations/__pycache__/
 /users/__pycache__/
 /users/migrations/__pycache__/
+/tests/__pycache__/
+/tests/migrations/__pycache__/
 /PyLearn/__pycache__/
 /db.sqlite3

@@ -4,11 +4,6 @@ from .models import (
     TypeBlock,
     Block,
     CourseView,
-    Test,
-    Question,
-    Option,
-    Answer,
-    AnswerOption,
 )
 
 
@@ -36,28 +31,3 @@ class CourseViewAdmin(admin.ModelAdmin):
     list_display = ["user", "course", "date"]
     list_filter = ["user", "course"]
     readonly_fields = ["user", "course", "date"]
-
-
-@admin.register(Test)
-class TestAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Question)
-class QuestionAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Option)
-class OptionAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(Answer)
-class AnswerAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(AnswerOption)
-class AnswerOptionAdmin(admin.ModelAdmin):
-    pass
