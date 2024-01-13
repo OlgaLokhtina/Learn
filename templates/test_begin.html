@@ -19,7 +19,7 @@
             <p><b>{{ element.text }}</b></p>
         {% endfor %}
         {% for option in options %}
-            <p><input id="option" name="option" type="radio" value="{{ option.text }}">{{ option.text }}</p>
+            <p><input id="option" name="option" type="radio" value="{{ option.id }}">{{ option.text }}</p>
         {% endfor %}
         <p></p>
         {% if page_obj.has_next %}

@@ -35,7 +35,7 @@ def test_attempt(request, pk):
     else:
         an = Answer.objects.get(answer_name=request.session.get("it"))
         ot = request.POST["option"]
-        o = Option.objects.get(text=ot)
+        o = Option.objects.get(id=ot)
         ao = AnswerOption(option=o, answer=an)
         ao.save()
 
