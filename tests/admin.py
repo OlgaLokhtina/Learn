@@ -5,7 +5,7 @@ from .models import (
     Question,
     Option,
     Answer,
-    AnswerOption,
+    Attempt,
 )
 
 
@@ -21,6 +21,7 @@ class QuestionAdmin(admin.ModelAdmin):
 
 @admin.register(Option)
 class OptionAdmin(admin.ModelAdmin):
+    list_display = ("id", "question", "text", "right")
     pass
 
 
@@ -29,6 +30,6 @@ class AnswerAdmin(admin.ModelAdmin):
     pass
 
 
-@admin.register(AnswerOption)
-class AnswerOptionAdmin(admin.ModelAdmin):
+@admin.register(Attempt)
+class AttemptAdmin(admin.ModelAdmin):
     pass

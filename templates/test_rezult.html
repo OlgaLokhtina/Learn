@@ -12,19 +12,34 @@
     {% include 'header-2.html' %}
     <div class="test-list">
         <p><h2>Результаты:</h2></p>
-        <p>{{ rezults.user }}</p>
-        <p>{{ rezults.date }}</p>
-        {% for opt in rezults.options.all %}
-            <p><b>{{ opt.question }}</b></p>
-            {% if opt.right %}
-                <p>Ваш ответ: <span class="green">{{ opt.text }}</span></p>
-                <p>Верно</p>
-            {% else %}
-                <p>Ваш ответ: <span class="red">{{ opt.text }}</span></p>
-                <p>Не верно</p>
-            {% endif%}
+        <p>{{ at.user }}</p>
+        <p>{{ at.start }}</p>
+        <p>{{ at.test }}</p>
+        <hr>
+        {% for res in results %}
+            <p><h4>{{ res.question }}</h4></p>
+            <p><i>{{ res.right }}</i></p>
+            {% for opt in res.options.all %}
+                {% if opt.right %}
+                    <p>Ваш ответ: <span class="green">{{ opt.text }}</span></p>
+                    <p>Верно</p>
+                {% else %}
+                    <p>Ваш ответ: <span class="red">{{ opt.text }}</span></p>
+                    <p>Не верно</p>
+                {% endif %}
+            {% endfor %}
+        <hr>
         {% endfor %}
+        {% if at.rezult >= at.test.mark %}
+            <p>Тест пройден</p>
+        {% else %}
+            <p>Тест не пройден</p>
+        {% endif %}
+        <p>{{ at.rezult }} % </p>
+
+
         <a class="enter" href="/main/test/">К списку тестов</a>
+
     </div>
 </body>
 </html>

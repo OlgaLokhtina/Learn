@@ -18,10 +18,16 @@
         {% for element in page_obj %}
             <p><b>{{ element.text }}</b></p>
         {% endfor %}
-        {% for option in options %}
-            <p><input id="option" name="option" type="radio" value="{{ option.id }}">{{ option.text }}</p>
-        {% endfor %}
-        <p></p>
+
+            {% for option in options %}
+                <p><input id="option" name="option-1" type="radio" value="{{ option.id }}">{{ option.text }}</p>
+            {% endfor %}
+
+            {% for option in options_1 %}
+                <p><input id="option-1" name="option-1" type="checkbox" value="{{ option.id }}">
+                    <label for="option-1">{{ option.text }}</label></p>
+            {% endfor %}
+
         {% if page_obj.has_next %}
             <input type="hidden" name="user_page" value="{{  page_obj.next_page_number  }}">
         {% else %}

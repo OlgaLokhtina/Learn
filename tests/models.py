@@ -10,6 +10,7 @@ class Test(models.Model):
     title = models.CharField(max_length=50)
     preview = models.ImageField(upload_to="courses")
     description = models.TextField()
+    mark = models.FloatField()
 
     def __str__(self):
         return self.title
@@ -40,22 +41,33 @@ class Option(models.Model):
         return self.text
 
 
-class Answer(models.Model):
+class Attempt(models.Model):
+    test = models.ForeignKey(
+        Test, default=None, null=True, on_delete=models.SET_DEFAULT
+    )
     user = models.ForeignKey(
         User, default=None, null=True, on_delete=models.SET_DEFAULT
     )
-    date = models.DateTimeField(default=timezone.now)
-    answer_name = models.CharField(max_length=100, default=None)
-    options = models.ManyToManyField(Option, through="AnswerOption")
-
-    def __str__(self):
-        return self.answer_name
+    start = models.DateTimeField(default=timezone.now)
+    finish = models.DateTimeField(default=timezone.now)
+    rezult = models.FloatField(default=0)
 
 
-class AnswerOption(models.Model):
-    answer = models.ForeignKey(
-        Answer, default=None, null=True, on_delete=models.SET_DEFAULT
+class Answer(models.Model):
+    attempt = models.ForeignKey(
+        Attempt, default=None, null=True, on_delete=models.SET_DEFAULT
     )
-    option = models.ForeignKey(
-        Option, default=None, null=True, on_delete=models.SET_DEFAULT
+    question = models.ForeignKey(
+        Question, default=None, null=True, on_delete=models.SET_DEFAULT
     )
+    right = models.BooleanField(default=None)
+    options = models.ManyToManyField(Option)
+
+
+# class AnswerOption(models.Model):
+#     answer = models.ForeignKey(
+#         Answer, default=None, null=True, on_delete=models.SET_DEFAULT
+#     )
+#     option = models.ForeignKey(
+#         Option, default=None, null=True, on_delete=models.SET_DEFAULT
+#     )
