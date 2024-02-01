@@ -11,12 +11,10 @@
     {% include 'header.html' %}
     {% include 'header-2.html' %}
     <div class="test-pass">
-        <form action="{% url 'test_attempt' test.id %}" method="post">
+        <form action="{% url 'test_attempt' test.id %}">
             {% csrf_token %}
             <h2>{{ test.title }}</h2>
             <p>{{ test.description }}</p>
-            <input type="hidden" name="user_page" value="1">
-            <input type="hidden" name="d" value="{{ timezone.now }}">
             <button>Начать тестирование</button>
         </form>
     </div>

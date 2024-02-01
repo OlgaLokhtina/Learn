@@ -14,7 +14,7 @@
     <div class="test-list">
     <form name="test" id="test" action="" method="post">
         {% csrf_token %}
-        <p>Вопрос {{ page_obj.number }} из {{ request.session.num_pages }}</p>
+        <p>Вопрос {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</p>
         {% for element in page_obj %}
             <p><b>{{ element.text }}</b></p>
         {% endfor %}
@@ -36,6 +36,8 @@
             <button id="subButton" type="submit" >
                 Далее
             </button>
+
+        {{ form }}
 
     </form>
     </div>
